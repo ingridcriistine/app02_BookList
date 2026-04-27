@@ -11,28 +11,36 @@
     android:padding="16dp"
     tools:context=".controller.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <!-- Cabeçalho: Imagem + Título -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        app:srcCompat="@drawable/book" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="381dp"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
-        android:paddingTop="5dp"
-        android:paddingBottom="30dp"
-        android:text="My Book List"
-        android:textAlignment="center"
-        android:textColor="#371E1E"
-        android:textSize="45sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/book" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="cursive"
+            android:text="My Book List"
+            android:textAlignment="center"
+            android:textColor="#371E1E"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/booksRead"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3A3333"
         android:padding="10dp"
@@ -41,20 +49,59 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Buscar por título ou gênero"/>
+
+    <RadioGroup
+        android:id="@+id/rgFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp">
+
+        <RadioButton
+            android:id="@+id/rbAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Todos"
+            app:buttonTint="#6F6666" />
+
+        <RadioButton
+            android:id="@+id/rbRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:buttonTint="#6F6666"
+            android:text="Lidos" />
+
+        <RadioButton
+            android:id="@+id/rbUnread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:buttonTint="#6F6666"
+            android:text="Não Lidos" />
+    </RadioGroup>
+
     <ListView
         android:id="@+id/lvBooks"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
         android:backgroundTint="#615050"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp" />
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
 
     <TextView
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:text="Nenhum livro cadastrado"
         android:visibility="gone" />
 
@@ -62,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#3C3636"
         android:onClick="newBook"
         android:text="Adicionar livro" />
