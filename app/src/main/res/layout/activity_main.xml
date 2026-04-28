@@ -11,13 +11,12 @@
     android:padding="16dp"
     tools:context=".controller.MainActivity">
 
-    <!-- Cabeçalho: Imagem + Título -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingBottom="20dp">
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -53,10 +52,10 @@
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
         android:ems="10"
+        android:hint="Buscar por título ou autor"
         android:inputType="text"
-        android:hint="Buscar por título ou gênero"/>
+        android:paddingTop="40dp" />
 
     <RadioGroup
         android:id="@+id/rgFilter"
