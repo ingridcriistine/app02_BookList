@@ -86,9 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-        // listaCompleta = bookDAO.getLivros().toMutableList()
-        listaCompleta = getMockBooks()
-        
+        listaCompleta = bookDAO.getLivros().toMutableList()
         updateStatistics()
         applyFilters()
     }
@@ -108,7 +106,7 @@ class MainActivity : AppCompatActivity() {
             }
             
             matchesSearch && matchesFilter
-        }
+        }.sortedBy{ it.titulo }
 
         listaExibida.clear()
         listaExibida.addAll(filtered)
@@ -127,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         if (listaCompleta.isNotEmpty()) {
             val readCount = listaCompleta.count { it.lido }
             val percentage = (readCount.toDouble() / listaCompleta.size * 100).toInt()
-            booksRead.text = "$percentage% de livros lidos"
+            booksRead.text = "$percentage% de livros lidos ($readCount/${listaCompleta.size})"
         } else {
             booksRead.text = "0% de livros lidos"
         }
@@ -136,16 +134,5 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         refreshData()
-    }
-
-    private fun getMockBooks(): MutableList<Book> {
-        return mutableListOf(
-            Book(1, "Harry Potter", "Fantasia", "J.K. Rowling", true),
-            Book(2, "O Hobbit", "Fantasia", "Tolkien", false),
-            Book(3, "Dom Casmurro", "Romance", "Machado de Assis", true),
-            Book(4, "1984", "Distopia", "George Orwell", false),
-            Book(5, "It", "Terror", "Stephen King", false),
-            Book(6, "Orgulho e Preconceito", "Romance", "Jane Austen", true)
-        )
     }
 }

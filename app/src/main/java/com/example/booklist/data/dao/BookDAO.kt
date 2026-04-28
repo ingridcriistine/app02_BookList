@@ -15,7 +15,7 @@ class BookDAO(private val context: Context) {
             put("titulo", livro.titulo)
             put("categoria", livro.categoria)
             put("autor", livro.autor)
-            put("lido", livro.lido)
+            put("lido", if (livro.lido) 1 else 0)
         }
         val id = db.insert(DBHelper.TABLE_NAME, null, values)
         db.close()
@@ -38,7 +38,7 @@ class BookDAO(private val context: Context) {
             val autor = cursor.getString(cursor.getColumnIndexOrThrow("autor"))
             val lido = cursor.getInt(cursor.getColumnIndexOrThrow("lido"))
 
-            bookList.add(Book(id, titulo, categoria, autor, lido == 0))
+            bookList.add(Book(id, titulo, categoria, autor, lido == 1))
         }
 
         cursor.close()
@@ -55,13 +55,13 @@ class BookDAO(private val context: Context) {
         var livro: Book? = null
 
         if(cursor.moveToFirst()){
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val idVal = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
             val titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"))
             val categoria = cursor.getString(cursor.getColumnIndexOrThrow("categoria"))
             val autor = cursor.getString(cursor.getColumnIndexOrThrow("autor"))
             val lido = cursor.getInt(cursor.getColumnIndexOrThrow("lido"))
 
-            livro = Book(id, titulo, categoria, autor, lido == 0)
+            livro = Book(idVal, titulo, categoria, autor, lido == 1)
         }
         cursor.close()
         db.close()
@@ -74,7 +74,7 @@ class BookDAO(private val context: Context) {
             put("titulo", livro.titulo)
             put("categoria", livro.categoria)
             put("autor", livro.autor)
-            put("lido", livro.lido)
+            put("lido", if (livro.lido) 1 else 0)
         }
         val rowsAffected = db.update(DBHelper.TABLE_NAME, values, "id = ?", arrayOf(livro.id.toString()))
 
@@ -89,6 +89,4 @@ class BookDAO(private val context: Context) {
         db.close()
         return rowsDeleted
     }
-
-
 }

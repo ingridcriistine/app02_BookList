@@ -10,7 +10,7 @@ data class Book(
     val titulo: String,
     val categoria: String,
     val autor: String,
-    val lido: Boolean = false
+    val lido: Boolean
 ){
   override fun toString(): String {
     val status = if (lido) "Lido" else "Não lido"
